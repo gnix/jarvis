@@ -155,4 +155,8 @@ echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: System update complete. Currently running at 100% power. Enjoy.$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
+
+echo "Do not forget to change your iTerm2 font to Nerd Fonts!"
+echo "iTerm2 -> Preferences -> Profiles -> Text -> Font -> Change Font"
+
 exit 0
