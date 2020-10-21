@@ -25,13 +25,13 @@ set hidden
 set expandtab
 
 " Change number of spaces that a <Tab> counts for during editing ops
-set softtabstop=2
+set softtabstop=4
 
 " Indentation amount for < and > commands.
-set shiftwidth=2
+set shiftwidth=4
 
 " do not wrap long lines by default
-set nowrap
+"set nowrap
 
 " Don't highlight current cursor line
 set nocursorline
@@ -475,3 +475,5 @@ set noswapfile
 if exists('g:loaded_webdevicons')
   call webdevicons#refresh()
 endif
+
+
