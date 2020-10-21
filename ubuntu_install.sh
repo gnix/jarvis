@@ -20,7 +20,7 @@ packages=(
   "ruby-dev" 
   "ruby-colorize"
 #  "tmux"
-#  "neovim"
+  "neovim"
 #  "python3"  # Already installed.
   "python3-pip"
   "zsh"
