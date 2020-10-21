@@ -1,9 +1,11 @@
 # Path to oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
+export ZSH="~/.oh-my-zsh"
 
 # Name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-ZSH_THEME=""
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="gianu"
 
 # TMUX
 # Automatically start tmux
@@ -27,11 +29,28 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node brew tmux)
+plugins=(
+	ansible
+        brew
+	colored-man-pages
+	colorize
+	docker
+	git
+	golang
+        node
+	pip
+	python
+	vagrant
+        brew
+        tmux
+)
+
+source $ZSH/oh-my-zsh.sh
+
 
 # User configuration
 # Hide user@hostname if it's expected default user
-DEFAULT_USER="ctay20"
+DEFAULT_USER="gianni"
 prompt_context(){}
 
 # Setting rg as the default source for fzf
@@ -114,6 +133,7 @@ export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 # Aliases
 alias vim="nvim"
+alias v="nvim"
 alias top="vtop --theme=wizard"
 alias ls="colorls -lA --sd"
 
@@ -125,3 +145,30 @@ prompt spaceship
 SPACESHIP_PACKAGE_SHOW=false
 SPACESHIP_NODE_SHOW=false
 SPACESHIP_GIT_STATUS_STASHED=''
+
+
+# Environment variables for Go
+export GOPATH=$HOME/Documents/programming/golang
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+
+
+# Add pygmentize to the PATH
+export PATH=$PATH:/Users/gianni/Library/Python/3.7/bin
+
+
+# Launch VSCode shortcut
+function code() { VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;}
+
+
+# find and grep shortcuts
+function f() { find . -iname "*$1*" ${@:2} }
+function r() { grep "$1" ${@:2} -R . }
+
+
+# mkdir and cd into it shortcut
+function mkcd() { mkdir -p "$@" && cd "$_"; }
+
+
+
