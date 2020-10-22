@@ -31,7 +31,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	ansible
-        brew
 	colored-man-pages
 	colorize
 	docker
@@ -136,7 +135,7 @@ alias v="nvim"
 alias top="vtop --theme=wizard"
 alias ls="colorls -lA --sd"
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 # Set Spaceship as prompt
 #autoload -U promptinit; promptinit
