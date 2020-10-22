@@ -215,14 +215,14 @@ echo "---------------------------------------------------------"
 
 cp ~/.config/nvim/space.vim ~/.config/nvim/plugged/vim-airline-themes/autoload/airline/themes/space.vim
 
-echo "---------------------------------------------------------"
-echo "$(tput setaf 2)JARVIS: Installing tmux plugin manager.$(tput sgr 0)"
-echo "---------------------------------------------------------"
-
-if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-  ~/.tmux/plugins/tpm/scripts/install_plugins.sh
-fi
+# echo "---------------------------------------------------------"
+# echo "$(tput setaf 2)JARVIS: Installing tmux plugin manager.$(tput sgr 0)"
+# echo "---------------------------------------------------------"
+# 
+# if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+#   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+#   ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+# fi
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Switching shell to zsh. You may need to logout.$(tput sgr 0)"
