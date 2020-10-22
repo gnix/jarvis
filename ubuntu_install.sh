@@ -1,33 +1,33 @@
 #!/bin/sh
+
+
+INSTALLDIR=$PWD
+
+
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Greetings. Preparing to power up and begin diagnostics.$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
-
-INSTALLDIR=$PWD
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing system packages.$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
 packages=(
-#  "git"
-#  "node"	# Brew package for nodejs and npm. 
   "curl"
   "nodejs"
   "npm"
+  "powerline"
   "fonts-powerline"
   "ruby"
-  "ruby-dev" 
+  "ruby-dev"
   "ruby-colorize"
   "tmux"
   "neovim"
-#  "python3"  # Already installed.
   "python3-pip"
   "zsh"
   "ripgrep"
   "fzf"
-#  "z"	# Brew package
 )
 
 sudo apt update
@@ -36,6 +36,7 @@ do
   sudo apt install $i -y
   echo "---------------------------------------------------------"
 done
+
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing Z (https://github.com/rupa/z).$(tput sgr 0)"
@@ -48,11 +49,6 @@ sudo mv z.sh /usr/local/bin
 # Attention: If you change the z.sh location, you need to update the zshrc file as well.
 source /usr/local/bin/z.sh
 
-######## add the ". /usr/local/bin/z.sh" command to .zshrc
-#printf "\n\n#initialize Z (https://github.com/rupa/z) \n. ~/z.sh \n\n" >> .bashrc
-# Reload shell 
-#source ~/.bashrc
-
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing Python Neovim client.$(tput sgr 0)"
@@ -60,11 +56,13 @@ echo "---------------------------------------------------------"
 
 pip3 install neovim
 
+
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing NodeJS client API for Neovim$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
 sudo npm install -g neovim
+
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing spaceship prompt$(tput sgr 0)"
@@ -73,7 +71,6 @@ echo "---------------------------------------------------------"
 # Not working. Let me try something else.
 #sudo npm install -g spaceship-prompt
 git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
-
 ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 
 
@@ -83,17 +80,20 @@ echo "---------------------------------------------------------"
 
 pip3 install vim-vint
 
+
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing bash language server$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
 sudo npm i -g bash-language-server
 
+
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing colorls$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
 sudo gem install colorls
+
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing system fonts.$(tput sgr 0)"
@@ -124,18 +124,21 @@ fi
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing zsh-autosuggestions.$(tput sgr 0)"
 echo "---------------------------------------------------------"
+
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing vtop.$(tput sgr 0)"
 echo "---------------------------------------------------------"
+
 sudo npm install -g vtop
 
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Creating backup directory at $BACKUP_DIR.$(tput sgr 0)"
 echo "---------------------------------------------------------"
+
 BACKUP_DIR=$INSTALLDIR/backup
 mkdir -p $BACKUP_DIR
 
@@ -152,6 +155,7 @@ for filename in "${files[@]}"; do
       echo "---------------------------------------------------------"
     fi
 done
+
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Backup completed.$(tput sgr 0)"
@@ -178,14 +182,14 @@ for file in $linkables ; do
 done
 
 
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing config files.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
 if [ ! -d $HOME/.config ]; then
     echo "Creating ~/.config"
     mkdir -p $HOME/.config
 fi
-
-echo "---------------------------------------------------------"
-echo "$(tput setaf 2)JARVIS: Installing config files.$(tput sgr 0)"
-echo "---------------------------------------------------------"
 
 for config in $INSTALLDIR/config/*; do
   target=$HOME/.config/$( basename $config )
@@ -206,8 +210,10 @@ done
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing Neovim plugins and linking dotfiles.$(tput sgr 0)"
 echo "---------------------------------------------------------"
+
 nvim +PlugInstall +qall
 nvim +UpdateRemotePlugins +qall
+
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing Space vim-airline theme.$(tput sgr 0)"
@@ -236,6 +242,4 @@ echo "$(tput setaf 2)JARVIS: System update complete. Enjoy!$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
 exit 0
-
-
 
