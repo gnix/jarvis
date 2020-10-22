@@ -41,8 +41,7 @@ plugins=(
 	pip
 	python
 	vagrant
-        brew
-        #tmux
+        tmux
 )
 
 source $ZSH/oh-my-zsh.sh
