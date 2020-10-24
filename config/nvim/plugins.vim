@@ -6,10 +6,10 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   "autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+
 call plug#begin('~/.config/nvim/autoload/plugged')
 
-
-    " === Editing Plugins === "
+    " ========== Editing Plugins =========== "
     " Trailing whitespace highlighting & automatic fixing
     Plug 'ntpeters/vim-better-whitespace'
 
@@ -23,26 +23,39 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'neoclide/coc-python'
 
-    " Denite - Fuzzy file finding, file management, project searching
-    Plug 'Shougo/denite.nvim'
+    " FZF - Fuzzy file finding, file management, project searching
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
 
     " Snippet support
     Plug 'Shougo/neosnippet'
     Plug 'Shougo/neosnippet-snippets'
 
-    " Print function signatures in echo area
-    Plug 'Shougo/echodoc.vim'
+    " Comment stuff out easily
+    Plug 'tpope/vim-commentary'
+
+    " The undo history visualizer for VIM
+    Plug 'mbbill/undotree'
 
 
-    " === Git Plugins === "
+    Plug 'liuchengxu/vista.vim'
+
+    " ========== Git Plugins ========== "
     " Enable git changes to be shown in sign column
     Plug 'mhinz/vim-signify'
     Plug 'tpope/vim-fugitive'
 
-    " === Debugger === "
+    " ========== Python ========== "
+    " Plugin that modifies Vim’s indentation behavior to comply with PEP8
+    Plug 'Vimjas/vim-python-pep8-indent'
+
+    " ALE (Asynchronous Lint Engine) is a plugin providing linting
+    Plug 'dense-analysis/ale'
+
+    " ========== Debugger ========== "
     "Plug 'puremourning/vimspector'
 
-    " === Javascript Plugins === "
+    " ========== Javascript Plugins ========== "
     " Typescript syntax highlighting
     "Plug 'HerringtonDarkholme/yats.vim'
 
@@ -53,22 +66,22 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     "Plug 'heavenshell/vim-jsdoc'
 
 
-    " ==== Golang Plugins === "
+    " ==== Golang Plugins ========== "
     " Vim-Go
-    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    "Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-    " === Syntax Highlighting === "
+    " ========== Syntax Highlighting ========== "
     " Syntax highlighting for nginx
-    Plug 'chr4/nginx.vim'
+    "Plug 'chr4/nginx.vim'
 
     " Syntax highlighting for javascript libraries
-    Plug 'othree/javascript-libraries-syntax.vim'
+    "Plug 'othree/javascript-libraries-syntax.vim'
 
     " Improved syntax highlighting and indentation
-    Plug 'othree/yajs.vim'
+    "Plug 'othree/yajs.vim'
 
 
-    " === UI === "
+    " ========== UI ========== "
     " File explorer
     Plug 'scrooloose/NERDTree'
 
@@ -84,18 +97,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 
-    "  === Miscellaneous === "
+    " ========== Miscellaneous ========== "
+
     " VimWiki
     Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
 
-" === VimWiki === "
-let g:vimwiki_list = [{
-  \ 'path': '$HOME/Documents/notes/zettelkasten',
-  \ 'template_path': '$HOME/Documents/notes/templates',
-  \ 'template_default': 'default',
-  \ 'template_ext': '.html'}]
-
-let g:vimwiki_valid_html_tags = 'b, pre'

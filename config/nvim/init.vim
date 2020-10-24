@@ -20,6 +20,9 @@ set clipboard=unnamed
 " Hides buffers instead of closing them
 set hidden
 
+" Live preview when doing a substitute command
+set inccommand=nosplit
+
 " === TAB/Space settings === "
 " Insert spaces when TAB is pressed.
 set expandtab
@@ -62,26 +65,26 @@ try
 "   --glob:  Include or exclues files for searching that match the given glob
 "            (aka ignore .git files)
 "
-call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git'])
+"call denite#custom#var('file/rec', 'command', ['rg', '--files', '--glob', '!.git'])
 
 " Use ripgrep in place of "grep"
-call denite#custom#var('grep', 'command', ['rg'])
+" call denite#custom#var('grep', 'command', ['rg'])
 
 " Custom options for ripgrep
 "   --vimgrep:  Show results with every match on it's own line
 "   --hidden:   Search hidden directories and files
 "   --heading:  Show the file name above clusters of matches from each file
 "   --S:        Search case insensitively if the pattern is all lowercase
-call denite#custom#var('grep', 'default_opts', ['--hidden', '--vimgrep', '--heading', '-S'])
+" call denite#custom#var('grep', 'default_opts', ['--hidden', '--vimgrep', '--heading', '-S'])
 
 " Recommended defaults for ripgrep via Denite docs
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-call denite#custom#var('grep', 'separator', ['--'])
-call denite#custom#var('grep', 'final_opts', [])
+" call denite#custom#var('grep', 'recursive_opts', [])
+" call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+" call denite#custom#var('grep', 'separator', ['--'])
+" call denite#custom#var('grep', 'final_opts', [])
 
 " Remove date from buffer list
-call denite#custom#var('buffer', 'date_format', '')
+" call denite#custom#var('buffer', 'date_format', '')
 
 " Custom options for Denite
 "   auto_resize             - Auto resize the Denite window height automatically.
@@ -92,33 +95,44 @@ call denite#custom#var('buffer', 'date_format', '')
 "   prompt_highlight        - Specify color of prompt
 "   highlight_matched_char  - Matched characters highlight
 "   highlight_matched_range - matched range highlight
-let s:denite_options = {'default' : {
-\ 'split': 'floating',
-\ 'start_filter': 1,
-\ 'auto_resize': 1,
-\ 'source_names': 'short',
-\ 'prompt': 'λ ',
-\ 'highlight_matched_char': 'QuickFixLine',
-\ 'highlight_matched_range': 'Visual',
-\ 'highlight_window_background': 'Visual',
-\ 'highlight_filter_background': 'DiffAdd',
-\ 'winrow': 1,
-\ 'vertical_preview': 1
-\ }}
+" let s:denite_options = {'default' : {
+" \ 'split': 'floating',
+" \ 'start_filter': 1,
+" \ 'auto_resize': 1,
+" \ 'source_names': 'short',
+" \ 'prompt': 'λ ',
+" \ 'highlight_matched_char': 'QuickFixLine',
+" \ 'highlight_matched_range': 'Visual',
+" \ 'highlight_window_background': 'Visual',
+" \ 'highlight_filter_background': 'DiffAdd',
+" \ 'winrow': 1,
+" \ 'vertical_preview': 1
+" \ }}
 
 " Loop through denite options and enable them
-function! s:profile(opts) abort
-  for l:fname in keys(a:opts)
-    for l:dopt in keys(a:opts[l:fname])
-      call denite#custom#option(l:fname, l:dopt, a:opts[l:fname][l:dopt])
-    endfor
-  endfor
-endfunction
+" function! s:profile(opts) abort
+"   for l:fname in keys(a:opts)
+"     for l:dopt in keys(a:opts[l:fname])
+"       call denite#custom#option(l:fname, l:dopt, a:opts[l:fname][l:dopt])
+"     endfor
+"   endfor
+" endfunction
 
-call s:profile(s:denite_options)
-catch
-  echo 'Denite not installed. It should work after running :PlugInstall'
+" call s:profile(s:denite_options)
+" catch
+"   echo 'Denite not installed. It should work after running :PlugInstall'
 endtry
+
+" === fzf === "
+nnoremap <leader>p :Files<CR>
+nnoremap <leader>bl :Rg<CR>
+nnoremap <leader>bb :Buffers<CR>
+nnoremap <C-y> :Colors<CR>
+nnoremap <A-y> <cmd>Helptags<CR>
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+let $FZF_DEFAULT_OPTS='--reverse'
+
+
 
 " === Coc.nvim === "
 " use <tab> for trigger completion and navigate to next complete item
@@ -134,6 +148,23 @@ inoremap <silent><expr> <TAB>
 
 "Close preview window when completion is done.
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" === CoC Python === "
+" Going To definition
+nmap <silent> gd <Plug>(coc-definition)
+
+" Display documentation
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Symbol rename
+nmap <leader>rn <Plug>(coc-rename)
 
 " === NeoSnippet === "
 " Map <C-k> as shortcut to activate snippet if available
@@ -223,6 +254,44 @@ let g:used_javascript_libs = 'underscore,requirejs,chai,jquery'
 
 " === Signify === "
 let g:signify_sign_delete = '-'
+
+
+" === ALE Linter === "
+let g:ale_fixers = {
+      \    'python': ['yapf'],
+      \}
+nmap <F10> :ALEFix<CR>
+let g:ale_fix_on_save = 1
+
+function! LinterStatus() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+
+  return l:counts.total == 0 ? '✨ all good ✨' : printf(
+        \   '😞 %dW %dE',
+        \   all_non_errors,
+        \   all_errors
+        \)
+endfunction
+
+set statusline=
+set statusline+=%m
+set statusline+=\ %f
+set statusline+=%=
+set statusline+=\ %{LinterStatus()}
+
+
+" === VimWiki === "
+let g:vimwiki_list = [{
+  \ 'path': '$HOME/Documents/notes/zettelkasten',
+  \ 'template_path': '$HOME/Documents/notes/templates',
+  \ 'template_default': 'default',
+  \ 'template_ext': '.html'}]
+
+let g:vimwiki_valid_html_tags = 'b, pre'
+
 
 " ============================================================================ "
 " ===                                UI                                    === "

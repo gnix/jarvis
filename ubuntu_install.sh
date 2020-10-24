@@ -28,6 +28,7 @@ packages=(
   "zsh"
   "ripgrep"
   "fzf"
+  "ctags"
 )
 
 sudo apt update
@@ -80,6 +81,14 @@ echo "---------------------------------------------------------"
 
 pip3 install vim-vint
 
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing Google's YAPF linter$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+pip3 install yapf
+pip3 install pylint
+pip3 install jedi
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing bash language server$(tput sgr 0)"
