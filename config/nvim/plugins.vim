@@ -10,6 +10,9 @@ endif
 call plug#begin('~/.config/nvim/autoload/plugged')
 
     " ========== Editing Plugins =========== "
+    " The fancy start screen for Vim and Neovim
+    Plug 'mhinz/vim-startify'
+
     " Trailing whitespace highlighting & automatic fixing
     Plug 'ntpeters/vim-better-whitespace'
 
@@ -19,13 +22,23 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Improved motion in Vim
     Plug 'easymotion/vim-easymotion'
 
+    " FZF - Fuzzy file finding, file management, project searching
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+
+    " The undo history visualizer for VIM
+    Plug 'mbbill/undotree'
+
+    " High-performance color highlighter for Neovim
+    Plug 'norcalli/nvim-colorizer.lua'
+
+    " ========== Software Development ========== "
     " Intellisense Engine
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'neoclide/coc-python'
 
-    " FZF - Fuzzy file finding, file management, project searching
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
+    " ALE (Asynchronous Lint Engine) is a plugin providing linting
+    Plug 'dense-analysis/ale'
 
     " Snippet support
     Plug 'Shougo/neosnippet'
@@ -34,51 +47,21 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Comment stuff out easily
     Plug 'tpope/vim-commentary'
 
-    " The undo history visualizer for VIM
-    Plug 'mbbill/undotree'
-
-
+    " View and search LSP symbols, tags in Vim/NeoVim
     Plug 'liuchengxu/vista.vim'
 
-    " ========== Git Plugins ========== "
     " Enable git changes to be shown in sign column
     Plug 'mhinz/vim-signify'
     Plug 'tpope/vim-fugitive'
+
 
     " ========== Python ========== "
     " Plugin that modifies Vim’s indentation behavior to comply with PEP8
     Plug 'Vimjas/vim-python-pep8-indent'
 
-    " ALE (Asynchronous Lint Engine) is a plugin providing linting
-    Plug 'dense-analysis/ale'
 
     " ========== Debugger ========== "
     "Plug 'puremourning/vimspector'
-
-    " ========== Javascript Plugins ========== "
-    " Typescript syntax highlighting
-    "Plug 'HerringtonDarkholme/yats.vim'
-
-    " ReactJS JSX syntax highlighting
-    "Plug 'mxw/vim-jsx'
-
-    " Generate JSDoc commands based on function signature
-    "Plug 'heavenshell/vim-jsdoc'
-
-
-    " ==== Golang Plugins ========== "
-    " Vim-Go
-    "Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-    " ========== Syntax Highlighting ========== "
-    " Syntax highlighting for nginx
-    "Plug 'chr4/nginx.vim'
-
-    " Syntax highlighting for javascript libraries
-    "Plug 'othree/javascript-libraries-syntax.vim'
-
-    " Improved syntax highlighting and indentation
-    "Plug 'othree/yajs.vim'
 
 
     " ========== UI ========== "
@@ -98,9 +81,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
 
     " ========== Miscellaneous ========== "
-
     " VimWiki
     Plug 'vimwiki/vimwiki'
+
 
 call plug#end()
 
