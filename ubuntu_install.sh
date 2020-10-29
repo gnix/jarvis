@@ -120,12 +120,12 @@ source /usr/local/bin/z.sh
 
 
 
-
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing colorls$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
 sudo gem install colorls
+
 
 
 echo "---------------------------------------------------------"
@@ -137,30 +137,8 @@ unzip Hack.zip -d ~/.fonts
 fc-cache -fv
 rm Hack.zip
 
-
 # Create backup folder if it doesn't exist
 mkdir -p ~/.local/share/nvim/backup
-
-echo "---------------------------------------------------------"
-echo "$(tput setaf 2)JARVIS: Installing oh-my-zsh.$(tput sgr 0)"
-echo "---------------------------------------------------------"
-
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-else
-  echo "---------------------------------------------------------"
-  echo "$(tput setaf 2)JARVIS: oh-my-zsh already installed.$(tput sgr 0)"
-  echo "---------------------------------------------------------"
-fi
-
-
-
-echo "---------------------------------------------------------"
-echo "$(tput setaf 2)JARVIS: Installing spaceship prompt$(tput sgr 0)"
-echo "---------------------------------------------------------"
-
-git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
-ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 
 
 
@@ -215,6 +193,30 @@ for config in $INSTALLDIR/config/*; do
     ln -s $config $target
   fi
 done
+
+
+# Important: Install oh-my-zsh after you have a symlink to .zshrc.
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing oh-my-zsh.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+else
+  echo "---------------------------------------------------------"
+  echo "$(tput setaf 2)JARVIS: oh-my-zsh already installed.$(tput sgr 0)"
+  echo "---------------------------------------------------------"
+fi
+
+
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing spaceship prompt$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+
 
 
 
