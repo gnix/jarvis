@@ -81,33 +81,6 @@ done
 
 
 echo "---------------------------------------------------------"
-echo "$(tput setaf 2)JARVIS: Backing up old Neovim, ZSH, and tmux config files (Backup dir=$BACKUP_DIR).$(tput sgr 0)"
-echo "---------------------------------------------------------"
-
-BACKUP_DIR=$INSTALLDIR/backup
-mkdir -p $BACKUP_DIR
-
-files=("$HOME/.config/nvim" "$HOME/.zshrc" "$HOME/.tmux.conf")
-for filename in "${files[@]}"; do
-    if [ -f $filename -o -d $filename ]; then
-      echo "---------------------------------------------------------"
-      echo "$(tput setaf 2)JARVIS: Backing up $filename.$(tput sgr 0)"
-      echo "---------------------------------------------------------"
-      mv $filename $BACKUP_DIR 2>/dev/null
-	else
-      echo "---------------------------------------------------------"
-      echo -e "$(tput setaf 3)JARVIS: $filename does not exist at this location or is a symlink.$(tput sgr 0)"
-      echo "---------------------------------------------------------"
-    fi
-done
-
-echo "---------------------------------------------------------"
-echo "$(tput setaf 2)JARVIS: Backup completed.$(tput sgr 0)"
-echo "---------------------------------------------------------"
-
-
-
-echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing Z (https://github.com/rupa/z).$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
@@ -147,6 +120,47 @@ echo "$(tput setaf 2)JARVIS: Installing zsh-autosuggestions.$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+
+
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing oh-my-zsh.$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+else
+  echo "---------------------------------------------------------"
+  echo "$(tput setaf 2)JARVIS: oh-my-zsh already installed.$(tput sgr 0)"
+  echo "---------------------------------------------------------"
+fi
+
+
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Backing up old Neovim, ZSH, and tmux config files (Backup dir=$BACKUP_DIR).$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+BACKUP_DIR=$INSTALLDIR/backup
+mkdir -p $BACKUP_DIR
+
+files=("$HOME/.config/nvim" "$HOME/.zshrc" "$HOME/.tmux.conf")
+for filename in "${files[@]}"; do
+    if [ -f $filename -o -d $filename ]; then
+      echo "---------------------------------------------------------"
+      echo "$(tput setaf 2)JARVIS: Backing up $filename.$(tput sgr 0)"
+      echo "---------------------------------------------------------"
+      mv $filename $BACKUP_DIR 2>/dev/null
+	else
+      echo "---------------------------------------------------------"
+      echo -e "$(tput setaf 3)JARVIS: $filename does not exist at this location or is a symlink.$(tput sgr 0)"
+      echo "---------------------------------------------------------"
+    fi
+done
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Backup completed.$(tput sgr 0)"
+echo "---------------------------------------------------------"
 
 
 
@@ -195,30 +209,6 @@ for config in $INSTALLDIR/config/*; do
 done
 
 
-# Important: Install oh-my-zsh after you have a symlink to .zshrc.
-echo "---------------------------------------------------------"
-echo "$(tput setaf 2)JARVIS: Installing oh-my-zsh.$(tput sgr 0)"
-echo "---------------------------------------------------------"
-
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-else
-  echo "---------------------------------------------------------"
-  echo "$(tput setaf 2)JARVIS: oh-my-zsh already installed.$(tput sgr 0)"
-  echo "---------------------------------------------------------"
-fi
-
-
-
-echo "---------------------------------------------------------"
-echo "$(tput setaf 2)JARVIS: Installing spaceship prompt$(tput sgr 0)"
-echo "---------------------------------------------------------"
-
-git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
-ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
-
-
-
 
 echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing Neovim plugins and linking dotfiles.$(tput sgr 0)"
@@ -234,6 +224,15 @@ echo "$(tput setaf 2)JARVIS: Installing Space vim-airline theme.$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
 cp ~/.config/nvim/space.vim ~/.config/nvim/autoload/plugged/vim-airline-themes/autoload/airline/themes/space.vim
+
+
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing spaceship prompt$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
+git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 
 
 
