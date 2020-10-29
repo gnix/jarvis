@@ -2,6 +2,7 @@
 
 
 INSTALLDIR=$PWD
+ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
 
 
 echo "---------------------------------------------------------"
@@ -69,8 +70,6 @@ echo "---------------------------------------------------------"
 echo "$(tput setaf 2)JARVIS: Installing spaceship prompt$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
-# Not working. Let me try something else.
-#sudo npm install -g spaceship-prompt
 git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
 ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
 
@@ -87,7 +86,19 @@ echo "$(tput setaf 2)JARVIS: Installing Google's YAPF linter$(tput sgr 0)"
 echo "---------------------------------------------------------"
 
 pip3 install yapf
+
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing PyLint$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
 pip3 install pylint
+
+
+echo "---------------------------------------------------------"
+echo "$(tput setaf 2)JARVIS: Installing Jedi$(tput sgr 0)"
+echo "---------------------------------------------------------"
+
 pip3 install jedi
 
 echo "---------------------------------------------------------"
