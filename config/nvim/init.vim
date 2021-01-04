@@ -65,6 +65,12 @@ source ~/.config/nvim/plugconfig/nerdtree.vim
 source ~/.config/nvim/plugconfig/vim-airline.vim
 source ~/.config/nvim/plugconfig/vim-signify.vim
 
+let g:vimspector_enable_mappings = 'HUMAN'
+nmap <leader>dd :call vimspector#Launch()<CR>
+nmap <leader>dx :VimspectorReset<CR>
+nmap <leader>de :VimspectorEval
+nmap <leader>dw :VimspectorWatch
+nmap <leader>do :VimspectorShowOutput
 
 " ============================================================================ "
 " ===                                UI                                    === "
