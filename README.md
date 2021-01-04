@@ -1,4 +1,4 @@
- <div align="center">
+ div align="center">
   <!-- PR's Welcome -->
   <a href="http://makeapullrequest.com">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square"
@@ -8,10 +8,10 @@
   <img src="https://img.shields.io/badge/Editor-neovim-brightgreen.svg" />
 </div>
 
- <h1 align="center">Jarvis</h1>
+ <h1 align="center">Rever</h1>
 
 <div align="center">
-  <strong>(Neo)Vim of the Future</strong>
+  <strong>Neovim for Python Developers</strong>
 </div>
 <div align="center">
   A powerful, minimalist development environment with cutting-edge features
@@ -23,19 +23,25 @@
 </div>
 
 <div align="center">
-  <img src="https://i.imgur.com/2rqF24f.png" alt="Jarvis SS"/>
+  <img src="https://i.imgur.com/2rqF24f.png" alt="Rever SS"/>
 </div>
 <br/>
 
 ## Table of Contents
+- [Introduction](#introduction)
 - [Features](#features)
 - [Installation](#installation)
 - [Commands](#commands)
 - [Support](#support)
 
+## Introduction
+
+First thing first, Rever is a fork of Jarvis. Rever has been adapted to better suit Python developers that work on Ubuntu Linux. If you work on MacOSX and need a powerful, web development-focused environment powered by Neovim, iTerm2, tmux, and zsh, then I suggest you to check out Jarvis.
+
+
 ## Features
 
-The following are features provided by Jarvis. They all have quick keybindings to make them quick and easy to use.
+The following are features provided by Rever. They all have quick keybindings to make them quick and easy to use.
 
 1. **Quick-open files** - *zsh* & *NeoVim*
 
@@ -113,14 +119,9 @@ This is a collection of cool tools that you might want to use.
 
 [`taskbook`](https://github.com/klauscfhq/taskbook) - Tasks, boards, & notes for command-line. Think Trello for the terminal.
 
-[`pecan`](https://github.com/zzzeyez/Pecan) - Configurable menu bar for OSX.
-
-[`vim-markdown-composer`](https://github.com/euclio/vim-markdown-composer) - Asynchronous markdown preview plugin for Vim/Neovim.
-
-[`shpotify`](https://github.com/hnarayanan/shpotify) - Control Spotify from the command line (OSX-only)
 
 > **\*** -  Tool is installed automatically if `install.sh` script is used
 
 ## Support
 
-If you find any problems or bugs, please open a new [issue](https://github.com/ctaylo21/jarvis/issues).
+If you find any problems or bugs, please open a new [issue](https://github.com/gnix/rever/issues).
